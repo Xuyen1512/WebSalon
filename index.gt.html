@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Giới thiệu - Salon Làn Mây</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(#ffebcd, #fff5e6);
+      font-size: 16px;
+      line-height: 1.6;
+      padding-top: 70px;
+    }
+
+    /* Header */
+    #header {
+      background-color: white;
+      height: 50px;
+      width: 1200px;
+      padding: 10px;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #header nav {
+      font-size: 18px;
+      color: #794604;
+    }
+
+    /* Section */
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+      color: #553d12;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 800;
+      color: #895900;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-top: 40px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    /* Gallery */
+    .gallery {
+      width: 100%;
+      height: 500px;
+      position: relative;
+      margin: 50px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      cursor: pointer;
+    }
+
+    .gallery img.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .gallery-note {
+      text-align: center;
+      font-style: italic;
+      margin-top: 10px;
+      color: #5c3d0a;
+    }
+
+    /* Footer */
+    #footer {
+      background-color: #D2B48C;
+      display: flex;
+      justify-content: space-between;
+      padding: 30px;
+      flex-wrap: wrap;
+      color: white;
+    }
+
+    .footer-column {
+      width: 45%;
+      margin-bottom: 20px;
+    }
+
+    .footer-column strong {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div id="header">
+    <div class="nav">Trang chủ | Giới thiệu | Dịch vụ | Tin tức | Đặt lịch | Tư vấn</div>
+  </div>
+
+  <!-- Nội dung chính -->
+  <div class="container">
+    <h1>Về Salon Làn Mây</h1>
+
+    <h2>GIỚI THIỆU VỀ SALON LÀN MÂY</h2>
+    <p><em>"Nâng niu từng sợi tóc, tôn vinh vẻ đẹp riêng"</em></p>
+    <p>Giữa nhịp sống đô thị hối hả, Salon Làn Mây ra đời như một khoảng lặng êm đềm – nơi bạn có thể dừng lại, chăm sóc bản thân và tìm lại sự nhẹ nhàng bên trong...</p>
+
+    <h2>SỨ MỆNH CỦA CHÚNG TÔI</h2>
+    <p>Chúng tôi tin rằng vẻ đẹp bền vững đến từ sự chăm sóc tử tế, lành mạnh và chân thật. Sứ mệnh của Làn Mây là:</p>
+    <ul>
+      <li>Chăm sóc tóc một cách tự nhiên, không xâm hại đến da đầu và cấu trúc tóc</li>
+      <li>Lắng nghe và tôn trọng vẻ đẹp cá nhân của từng khách hàng</li>
+      <li>Tạo ra một không gian làm đẹp để khách hàng được là chính mình</li>
+    </ul>
+
+    <h2>PHONG CÁCH PHỤC VỤ</h2>
+    <ul>
+      <li>Tư vấn kiểu tóc phù hợp với gương mặt, tính cách và môi trường sống</li>
+      <li>Chăm sóc bằng các sản phẩm hữu cơ, chiết xuất từ thiên nhiên</li>
+      <li>Không gian nhẹ nhàng với hương thơm và âm nhạc thư giãn</li>
+      <li>Thợ tóc tay nghề cao, cập nhật xu hướng tinh tế</li>
+    </ul>
+
+    <h2>CAM KẾT DỊCH VỤ CỦA LÀN MÂY</h2>
+    <ul>
+      <li>Không hóa chất độc hại – chỉ dùng sản phẩm tự nhiên</li>
+      <li>Không ép theo khuôn mẫu – thiết kế tóc riêng cho từng khách</li>
+      <li>Không gian xanh, sạch, giúp bạn thư giãn</li>
+      <li>Không chạy theo số lượng – phục vụ tận tâm từng người</li>
+    </ul>
+
+    <h2>BỘ SƯU TẬP ẢNH</h2>
+    <div class="gallery">
+      <img src="./images/1.jpg" class="slide active" alt="Ảnh 1">
+      <img src="./images/2.jpg" class="slide" alt="Ảnh 2">
+      <img src="./images/3.jpg" class="slide" alt="Ảnh 3">
+    </div>
+    <p class="gallery-note">Ảnh chạy tự động – bấm vào để xem ảnh tiếp theo.</p>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer">
+    <div class="footer-column">
+      <strong>Liên hệ:</strong>
+      Hotline: 0909 888 999<br>
+      Gmail: salonlanmay@gmail.com<br>
+      Zalo: 0909 888 999
+      <br><br>
+      <strong>Socials:</strong>
+      Facebook: fb.com/salonlanmay<br>
+      Tiktok: @salonlanmay
+    </div>
+    <div class="footer-column">
+      <strong>Địa chỉ các chi nhánh:</strong>
+      • CN1: 123 Lý Tự Trọng, Q.1, TP.HCM<br>
+      • CN2: 456 Phan Xích Long, Q.Phú Nhuận, TP.HCM<br>
+      • CN3: 789 Trần Não, TP. Thủ Đức<br>
+      • CN4: 101 Nguyễn Văn Cừ, Ninh Kiều, Cần Thơ<br>
+      • CN5: 202 Hai Bà Trưng, Q.3, TP.HCM
+    </div>
+  </div>
+
+  <!-- Script slideshow -->
+  <script>
+    const slides = document.querySelectorAll(".gallery .slide");
+    let current = 0;
+
+    function showNextSlide() {
+      slides[current].classList.remove("active");
+      current = (current + 1) % slides.length;
+      slides[current].classList.add("active");
+    }
+
+    setInterval(showNextSlide, 3000); // tự động chuyển sau 3 giây
+
+    slides.forEach(slide => {
+      slide.addEventListener("click", showNextSlide); // click để chuyển
+    });
+  </script>
+</body>
+</html>
