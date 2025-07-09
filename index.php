@@ -15,57 +15,6 @@
             width: 1200px;
         }
 
-        #header {
-            background-color: white;
-            height: 50px;
-            width: 1200px;
-            padding: 10px;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-        }
-
-        .logo {
-            float: left;
-            width: 20%;
-            min-height: 50px;
-            text-align: center;
-        }
-
-        .menu {
-            float: left;
-            width: 60%;
-            text-align: center;
-        }
-
-        .menu ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .menu li {
-            display: inline-block;
-            margin: 10px 15px;
-            font-weight: bold;
-            font-family: Segoe UI, sans-serif;
-            font-size: 22px;
-            color: #895900;
-            cursor: pointer;
-        }
-
-        .icon {
-            float: right;
-            width: 20%;
-            text-align: center;
-            padding-top: 10px;
-        }
-
-        .icon span {
-            font-size: 22px;
-            margin-left: 15px;
-            cursor: pointer;
-        }
         #Ten {
             text-align: center;
             margin: 20px 0;
@@ -73,6 +22,7 @@
             color: #895900;
             font-family: 'Times New Roman', serif;
         }
+
         #slogan {
             text-align: center;
             margin-top:0;
@@ -167,47 +117,16 @@
             align-items: center;  
         }
         
-        #footer {
-            background-color: #D2B48C;
-            display: flex;
-            justify-content: space-between;
-            padding: 30px;
-            height: auto;
-            flex-wrap: wrap;
-            clear:both;
-        }
-
-        .lienhe, .diachi {
-            width: 45%;
-        }
     </style>
+
+    <script src="jquery-3.7.1.min.js"></script>
+
 </head>
 
 <body>
     <div id="khung">
-        <div id="header">
-            <div class="logo">
-                <img src="Hinh/Logo.png" height="50px">
-            </div>
-
-            <div class="menu">
-                <ul>
-                    <li>Trang chủ</li>
-                    <li>Giới thiệu</li>
-                    <li>Dịch vụ</li>
-                    <li>Tin tức</li>
-                    <li>Đặt lịch</li>
-                    <li>Tư vấn</li>
-                </ul>
-            </div>
-
-            <div class="icon">
-                <span>🔍</span>
-                <span>👤</span>
-                <span>☰</span>
-            </div>
-        </div>
-
+        <?php include 'header.php'; ?>
+        
         <div id="banner"><img src="Hinh/Banner.jpg" ></div>
 
         <p id="Ten"> SaLon Làn Mây </p>
@@ -256,8 +175,6 @@
                 <a href="tintuc.html">[Xem chi tiết tại đây]</a></div>
             </div>
 
-          
-
             <p id="tieude"> ĐÁNH GIÁ </p>
             <div class="khoi">
                 <div id="text">
@@ -268,30 +185,9 @@
                     – <em>Linh Trầm, khách hàng thân thiết</em><br>
                     <a href="danhgia.html">[Xem thêm đánh giá]</a>
                 </div>
-        </div>
-
-        <div id="footer">
-            <div class="lienhe">
-                <p><strong>Liên hệ:</strong></p>
-                <p>Hotline: 0909 888 999</p>
-                <p>Gmail: salonlanmay@gmail.com</p>
-                <p>Zalo: 0909 888 999</p>
-                <p><strong>Socials:</strong></p>
-                <p>Facebook: fb.com/salonlanmay</p>
-                <p>Tiktok: @salonlanmay</p>
-            </div>
-
-            <div class="diachi">
-                <p><strong> Địa chỉ các chi nhánh</strong></p>
-                <ul style="line-height: 2" >
-                    <li> CN1: 123 Lý Tự Trọng, Q1, TPHCM </li>
-                    <li> CN2: 456 Phan Xích Long, Q.Phú Nhuận, TPHCM</li>
-                    <li> CN3: 89 Trần Não, TP.Thủ Đức</li>
-                    <li> CN4: 202 Hai Bà Trưng, Phường 6, Q3, TPHCM </li>
-                    <li> CN5: 101 Nguyễn Văn Cừ, Phường; An Hòa, Quận Ninh Kiều, Cần Thơ</li>
-                </ul>
             </div>
         </div>
-    </div>
+
+        <?php include 'footer.php'; ?>
 </body>
 </html>
