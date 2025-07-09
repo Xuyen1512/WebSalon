@@ -38,4 +38,4 @@ CREATE TABLE About (
 INSERT INTO About (title, content, image) VALUES
 ('Giới thiệu về Salon Làn Mây',
  'Nâng niu từng sợi tóc, tôn vinh vẻ đẹp riêng. Giữa nhịp sống đô thị hối hả, Salon Làn Mây ra đời như một khoảng lặng êm đềm – nơi bạn có thể dừng lại, chăm sóc bản thân và tìm lại sự nhẹ nhàng bên trong...',
- 'images/about.jpg');
+ 'Hinh/anh_gt.jpg');
