@@ -1,41 +1,93 @@
 CREATE DATABASE IF NOT EXISTS SalonLanMay;
 USE SalonLanMay;
 
-CREATE TABLE Policy (
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255),
+    phone VARCHAR(50),
+    address TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE branch (
+    branch_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    address TEXT,
+    phone VARCHAR(50),
+    zalo VARCHAR(50)
+);
+
+CREATE TABLE service (
+    service_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    description TEXT,
+    price DECIMAL(10,2),
+    image VARCHAR(255)
+);
+
+CREATE TABLE news (
+    news_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255),
+    content TEXT,
+    image VARCHAR(255),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE feedback (
+    feedback_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    content TEXT,
+    rating INT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE advice (
+    advice_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    question TEXT,
+    answer TEXT,
+    status ENUM('pending', 'answered') DEFAULT 'pending',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE appointment (
+    appointment_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    name VARCHAR(255),
+    phone VARCHAR(50),
+    email VARCHAR(255),
+    service_id INT,
+    branch_id INT,
+    date DATE,
+    time TIME,
+    note TEXT,
+    status ENUM('pending', 'confirmed', 'canceled') DEFAULT 'pending',
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (service_id) REFERENCES service(service_id),
+    FOREIGN KEY (branch_id) REFERENCES branch(branch_id)
+);
+
+CREATE TABLE policy (
     policy_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT
 );
 
-INSERT INTO Policy (title, content) VALUES
-('Chính sách bảo hành tóc nhuộm', 
- 'Bảo hành màu nhuộm trong 30 ngày. Khách được chỉnh sửa miễn phí nếu phai màu bất thường.'),
-('Chính sách bảo hành phục hồi', 
- 'Cam kết tóc không hư tổn thêm sau phục hồi. Miễn phí kiểm tra lại nếu tóc không đạt kết quả.');
-
-CREATE TABLE Branch (
-    branch_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    address TEXT,
-    phone VARCHAR(20),
-    zalo VARCHAR(20)
-);
-
-INSERT INTO Branch (name, address, phone, zalo) VALUES
-('CN1', '123 Lý Tự Trọng, Q.1, TP.HCM', '0909 888 999', '0909 888 999'),
-('CN2', '456 Phan Xích Long, Q.Phú Nhuận, TP.HCM', '0909 888 999', '0909 888 999'),
-('CN3', '789 Trần Não, TP. Thủ Đức', '0909 888 999', '0909 888 999'),
-('CN4', '101 Nguyễn Văn Cừ, Ninh Kiều, Cần Thơ', '0909 888 999', '0909 888 999'),
-('CN5', '202 Hai Bà Trưng, Q.3, TP.HCM', '0909 888 999', '0909 888 999');
-
-CREATE TABLE About (
+CREATE TABLE about (
     about_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255),
     content TEXT,
     image VARCHAR(255)
 );
 
-INSERT INTO About (title, content, image) VALUES
-('Giới thiệu về Salon Làn Mây',
- 'Nâng niu từng sợi tóc, tôn vinh vẻ đẹp riêng. Giữa nhịp sống đô thị hối hả, Salon Làn Mây ra đời như một khoảng lặng êm đềm – nơi bạn có thể dừng lại, chăm sóc bản thân và tìm lại sự nhẹ nhàng bên trong...',
- 'Hinh/anh_gt.jpg');
+CREATE TABLE search_log (
+    search_id INT AUTO_INCREMENT PRIMARY KEY,
+    keyword VARCHAR(255),
+    user_id INT,
+    search_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
