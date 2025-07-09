@@ -27,7 +27,10 @@
         text-align: center;
     }
 
-    a {text-decoration: none;}
+    a {
+        text-decoration: none;
+        color: #895900;
+    }
     a:visited {color: #895900;}
     a:hover {color: #f30707;}
 
