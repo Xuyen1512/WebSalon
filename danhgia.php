@@ -1,6 +1,15 @@
 <?php
 include("connect.php");
+session_start();
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
+// Xử lý submit đánh giá
 if (isset($_POST['submit'])) {
     $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
@@ -11,19 +20,15 @@ if (isset($_POST['submit'])) {
     $rating = intval($_POST['rating']);
     $feedback = mysqli_real_escape_string($conn, $_POST['feedback']);
 
-    $sql_user = "SELECT user_id FROM users WHERE email = '$email'";
-    $result_user = mysqli_query($conn, $sql_user);
+    // Cập nhật thông tin user (nếu người dùng nhập khác trước)
+    $sql_update_user = "
+        UPDATE users 
+        SET name = '$fullname', email = '$email', phone = '$phone'
+        WHERE user_id = $user_id
+    ";
+    mysqli_query($conn, $sql_update_user);
 
-    if (mysqli_num_rows($result_user) > 0) {
-        $row = mysqli_fetch_assoc($result_user);
-        $user_id = $row['user_id'];
-    } else {
-        $sql_insert_user = "INSERT INTO users (name, email, phone, created_at)
-                            VALUES ('$fullname', '$email', '$phone', NOW())";
-        mysqli_query($conn, $sql_insert_user);
-        $user_id = mysqli_insert_id($conn);
-    }
-
+    // Kiểm tra dịch vụ đã có chưa
     $sql_service = "SELECT service_id FROM service WHERE name = '$service'";
     $result_service = mysqli_query($conn, $sql_service);
 
@@ -31,12 +36,14 @@ if (isset($_POST['submit'])) {
         $row_service = mysqli_fetch_assoc($result_service);
         $service_id = $row_service['service_id'];
     } else {
+        // Nếu dịch vụ chưa có thì thêm mới
         $sql_insert_service = "INSERT INTO service (name, description, price, image)
                                VALUES ('$service', '$service_type', 0, '')";
         mysqli_query($conn, $sql_insert_service);
         $service_id = mysqli_insert_id($conn);
     }
 
+    // Thêm feedback
     $sql_feedback = "INSERT INTO feedback (user_id, content, rating, branch_id, service_id, created_at)
                      VALUES ('$user_id', '$feedback', '$rating', '$branch', '$service_id', NOW())";
 
@@ -49,7 +56,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <title>Đánh giá dịch vụ - Salon Làn Mây</title>
@@ -111,9 +118,9 @@ if (isset($_POST['submit'])) {
 
     <div class="container">
         <h1>ĐÁNH GIÁ DỊCH VỤ</h1>
-        <p>Cảm ơn quý khách đã ghé thăm Salon Làn Mây
-Rất mong quý khách dành chút thời gian đánh giá để chúng tôi hoàn thiện hơn mỗi ngày.
-Thank you for using our service. Please leave your feedback to help us improve.</p>
+        <p>Cảm ơn quý khách đã ghé thăm Salon Làn Mây.<br>
+        Rất mong quý khách dành chút thời gian đánh giá để chúng tôi hoàn thiện hơn mỗi ngày.<br>
+        Thank you for using our service. Please leave your feedback to help us improve.</p>
 
         <form method="post" action="">
             <label>Họ và tên / Full name</label>
@@ -133,7 +140,6 @@ Thank you for using our service. Please leave your feedback to help us improve.<
                 <option value="3">CN3 - 789 Trần Não, TP. Thủ Đức</option>
                 <option value="4">CN4 - 101 Nguyễn Văn Cừ, Phường An Hòa, Quận Ninh Kiều, Cần Thơ</option>
                 <option value="5">CN5 - 202 Hai Bà Trưng, Phường 6, Quận 3, TP. Hồ Chí Minh</option>
-
             </select>
 
             <label>Loại dịch vụ / Specific service</label>
