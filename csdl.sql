@@ -39,10 +39,15 @@ CREATE TABLE feedback (
     feedback_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     content TEXT,
-    rating INT,
+    rating INT CHECK (rating >= 1 AND rating <= 5),
+    branch_id INT,
+    service_id INT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (branch_id) REFERENCES branch(branch_id),
+    FOREIGN KEY (service_id) REFERENCES service(service_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
 
 CREATE TABLE advice (
     advice_id INT AUTO_INCREMENT PRIMARY KEY,
