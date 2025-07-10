@@ -5,16 +5,42 @@ if (isset($_POST['submit'])) {
     $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $branch = mysqli_real_escape_string($conn, $_POST['branch']);
+    $branch = intval($_POST['branch']);
     $service_type = mysqli_real_escape_string($conn, $_POST['service_type']);
     $service = mysqli_real_escape_string($conn, $_POST['service']);
     $rating = intval($_POST['rating']);
     $feedback = mysqli_real_escape_string($conn, $_POST['feedback']);
 
-    $sql = "INSERT INTO feedback (user_id, content, rating, created_at)
-            VALUES (NULL, '$feedback', '$rating', NOW())";
+    $sql_user = "SELECT user_id FROM users WHERE email = '$email'";
+    $result_user = mysqli_query($conn, $sql_user);
 
-    if (mysqli_query($conn, $sql)) {
+    if (mysqli_num_rows($result_user) > 0) {
+        $row = mysqli_fetch_assoc($result_user);
+        $user_id = $row['user_id'];
+    } else {
+        $sql_insert_user = "INSERT INTO users (name, email, phone, created_at)
+                            VALUES ('$fullname', '$email', '$phone', NOW())";
+        mysqli_query($conn, $sql_insert_user);
+        $user_id = mysqli_insert_id($conn);
+    }
+
+    $sql_service = "SELECT service_id FROM service WHERE name = '$service'";
+    $result_service = mysqli_query($conn, $sql_service);
+
+    if (mysqli_num_rows($result_service) > 0) {
+        $row_service = mysqli_fetch_assoc($result_service);
+        $service_id = $row_service['service_id'];
+    } else {
+        $sql_insert_service = "INSERT INTO service (name, description, price, image)
+                               VALUES ('$service', '$service_type', 0, '')";
+        mysqli_query($conn, $sql_insert_service);
+        $service_id = mysqli_insert_id($conn);
+    }
+
+    $sql_feedback = "INSERT INTO feedback (user_id, content, rating, branch_id, service_id, created_at)
+                     VALUES ('$user_id', '$feedback', '$rating', '$branch', '$service_id', NOW())";
+
+    if (mysqli_query($conn, $sql_feedback)) {
         echo "<script>alert('Cảm ơn bạn đã gửi đánh giá!');</script>";
     } else {
         echo "Lỗi: " . mysqli_error($conn);
@@ -85,7 +111,8 @@ if (isset($_POST['submit'])) {
 
     <div class="container">
         <h1>ĐÁNH GIÁ DỊCH VỤ</h1>
-        <p>Xin quý khách vui lòng điền thông tin để chúng tôi phục vụ tốt hơn.</p>
+        <p>Cảm ơn quý khách đã ghé thăm Salon Làn Mây
+Rất mong quý khách dành chút thời gian đánh giá để chúng tôi hoàn thiện hơn mỗi ngày.</p>
 
         <form method="post" action="">
             <label>Họ và tên / Full name</label>
@@ -100,9 +127,12 @@ if (isset($_POST['submit'])) {
             <label>Cơ sở sử dụng dịch vụ / Branch used</label>
             <select name="branch" required>
                 <option value="">-- Chọn cơ sở --</option>
-                <option value="1">Cơ sở 1 - Quận 10</option>
-                <option value="2">Cơ sở 2 - Quận 5</option>
-                <!-- có thể bổ sung thêm -->
+                <option value="1">CN1 - 123 Lý Tự Trọng, Q.1, TP.HCM</option>
+                <option value="2">CN2 - 456 Phan Xích Long, Q.Phú Nhuận, TP.HCM</option>
+                <option value="2">CN3 - 789 Trần Não, TP. Thủ Đức</option>
+                <option value="2">CN4 - 101 Nguyễn Văn Cừ, Phường An Hòa, Quận Ninh Kiều, Cần Thơ</option>
+                <option value="2">CN5 - 202 Hai Bà Trưng, Phường 6, Quận 3, TP. Hồ Chí Minh</option>
+
             </select>
 
             <label>Loại dịch vụ / Specific service</label>
