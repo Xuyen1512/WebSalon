@@ -5,11 +5,12 @@ CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     email VARCHAR(255) UNIQUE,
+    phone VARCHAR(20),
     password VARCHAR(255),
-    phone VARCHAR(50),
-    address TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    role ENUM('customer','employee','admin') DEFAULT 'customer',
+    created_at DATETIME
 );
+
 
 CREATE TABLE branch (
     branch_id INT AUTO_INCREMENT PRIMARY KEY,
