@@ -112,7 +112,8 @@ if (isset($_POST['submit'])) {
     <div class="container">
         <h1>ĐÁNH GIÁ DỊCH VỤ</h1>
         <p>Cảm ơn quý khách đã ghé thăm Salon Làn Mây
-Rất mong quý khách dành chút thời gian đánh giá để chúng tôi hoàn thiện hơn mỗi ngày.</p>
+Rất mong quý khách dành chút thời gian đánh giá để chúng tôi hoàn thiện hơn mỗi ngày.
+Thank you for using our service. Please leave your feedback to help us improve.</p>
 
         <form method="post" action="">
             <label>Họ và tên / Full name</label>
