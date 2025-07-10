@@ -130,9 +130,9 @@ Thank you for using our service. Please leave your feedback to help us improve.<
                 <option value="">-- Chọn cơ sở --</option>
                 <option value="1">CN1 - 123 Lý Tự Trọng, Q.1, TP.HCM</option>
                 <option value="2">CN2 - 456 Phan Xích Long, Q.Phú Nhuận, TP.HCM</option>
-                <option value="2">CN3 - 789 Trần Não, TP. Thủ Đức</option>
-                <option value="2">CN4 - 101 Nguyễn Văn Cừ, Phường An Hòa, Quận Ninh Kiều, Cần Thơ</option>
-                <option value="2">CN5 - 202 Hai Bà Trưng, Phường 6, Quận 3, TP. Hồ Chí Minh</option>
+                <option value="3">CN3 - 789 Trần Não, TP. Thủ Đức</option>
+                <option value="4">CN4 - 101 Nguyễn Văn Cừ, Phường An Hòa, Quận Ninh Kiều, Cần Thơ</option>
+                <option value="5">CN5 - 202 Hai Bà Trưng, Phường 6, Quận 3, TP. Hồ Chí Minh</option>
 
             </select>
 
