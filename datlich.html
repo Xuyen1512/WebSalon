@@ -1,0 +1,812 @@
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Đặt lịch Salon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Montserrat", "Cormorant Garamond", "Merriweather",
+          "Josefin Sans", sans-serif;
+        background: linear-gradient(
+          to right,
+          #ffebcd 30%,
+          white 80%,
+          #f3f3f3 100%
+        );
+        color: #7a5a1a;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: white;
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 900px;
+        box-sizing: border-box;
+        z-index: 1000;
+        font-size: 12px;
+        color: #7a5a1a;
+        font-weight: 600;
+      }
+      header .logo {
+        width: 60px;
+        height: 30px;
+        background: #ccc;
+        border-radius: 50%;
+      }
+      header .logo img {
+        height: 100%;
+        width: auto;
+      }
+      nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 15px;
+        font-weight: 600;
+      }
+      nav ul li {
+        cursor: pointer;
+      }
+      nav ul li a {
+        color: #7a5a1a;
+        text-decoration: none;
+      }
+      nav ul li a:hover {
+        text-decoration: underline;
+      }
+      .icons {
+        display: flex;
+        gap: 10px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      main {
+        margin-top: 70px;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+      }
+      .booking-container {
+        background: white;
+        max-width: 600px;
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+        padding: 20px 30px 30px;
+      }
+      .booking-header {
+        background: #d1d9e3;
+        border-radius: 12px 12px 0 0;
+        padding: 12px 20px;
+        font-weight: 600;
+        font-size: 14px;
+        color: #3a3a3a;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        user-select: none;
+      }
+      .booking-header i {
+        font-size: 18px;
+        color: #3a3a3a;
+      }
+      .booking-subtitle {
+        font-size: 10px;
+        color: #7a7a7a;
+        margin-top: 2px;
+        margin-left: 28px;
+        user-select: none;
+      }
+      .steps {
+        display: flex;
+        justify-content: space-between;
+        background: #e6e9ef;
+        border-radius: 6px;
+        font-size: 10px;
+        color: #3a3a3a;
+        margin: 20px 0 25px;
+        user-select: none;
+      }
+      .step {
+        flex: 1;
+        text-align: center;
+        padding: 6px 0;
+        border: 1px solid #d1d9e3;
+        border-right: none;
+        cursor: default;
+      }
+      .step:last-child {
+        border-right: 1px solid #d1d9e3;
+        border-radius: 0 6px 6px 0;
+      }
+      .step.active {
+        background: white;
+        font-weight: 600;
+        border-bottom: 3px solid #7a5a1a;
+        cursor: default;
+      }
+      label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #7a3a1a;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 6px;
+        user-select: none;
+      }
+      input[type="text"],
+      select,
+      input[type="number"],
+      input[type="date"],
+      input[type="time"] {
+        width: 100%;
+        border: 1px solid #f0d9d1;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 12px;
+        color: #7a5a1a;
+        outline-offset: 2px;
+        outline-color: transparent;
+        transition: outline-color 0.2s ease;
+      }
+      input[type="text"]:focus,
+      select:focus,
+      input[type="number"]:focus,
+      input[type="date"]:focus,
+      input[type="time"]:focus {
+        outline-color: #f0d9d1;
+      }
+      input::placeholder {
+        color: #d1b7af;
+        font-size: 10px;
+      }
+      button {
+        background-color: #5a5a5a;
+        color: white;
+        font-size: 13px;
+        padding: 8px 20px;
+        border-radius: 6px;
+        box-shadow: 0 4px 6px rgb(0 0 0 / 0.3);
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        user-select: none;
+      }
+      button:hover:not(:disabled) {
+        background-color: #444444;
+      }
+      button:disabled {
+        background-color: #a0a0a0;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+      .hidden {
+        display: none;
+      }
+      .error-message {
+        color: #b91c1c;
+        font-size: 10px;
+        margin-top: 4px;
+        user-select: none;
+      }
+      .success-message {
+        color: #15803d;
+        font-size: 12px;
+        margin-top: 10px;
+        font-weight: 600;
+        text-align: center;
+        user-select: none;
+      }
+
+      footer {
+        background-color: #a67c4a;
+        color: white;
+        font-size: 9px;
+        font-weight: 600;
+        line-height: 1.2;
+        padding: 25px 20px;
+        display: flex;
+        justify-content: space-between;
+        max-width: 900px;
+        margin: 0 auto 20px;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+      }
+      footer > div {
+        width: 45%;
+        min-width: 250px;
+      }
+      footer strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+      footer ul {
+        padding-left: 15px;
+        margin: 0;
+        list-style: disc;
+        line-height: 1.4;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="Hinh/Logo.png" alt="Logo" />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.php">Trang chủ</a></li>
+          <li><a href="index.gt.html">Giới thiệu</a></li>
+          <li><a href="DỊCH VỤ/dichvu.php">Dịch vụ</a></li>
+          <li><a href="tintuc.php">Tin tức</a></li>
+          <li>
+            <a href="datlich.html" class="font-bold text-[#7a5a1a]">Đặt lịch</a>
+          </li>
+          <li><a href="tuvan.html">Tư vấn</a></li>
+        </ul>
+      </nav>
+      <div class="icons">
+        <a href="timkiem.php" title="Tìm kiếm"><i class="fas fa-search"></i></a>
+        <a href="login.php" title="Đăng nhập"><i class="fas fa-user"></i></a>
+        <a href="dashboard.php" title="Menu"><i class="fas fa-bars"></i></a>
+      </div>
+    </header>
+
+    <main>
+      <div
+        class="booking-container"
+        role="main"
+        aria-label="Đặt lịch hẹn salon"
+      >
+        <h1 class="text-center text-xl font-normal mb-1 text-black">
+          Đặt lịch ngay - Trải nghiệm dịch vụ chuẩn Salon
+        </h1>
+        <p class="text-center text-[10px] text-black/60 mb-6 select-none">
+          Chăm sóc vẻ đẹp của bạn với đội ngũ nhân viên chuyên nghiệp
+        </p>
+
+        <form id="bookingForm" novalidate>
+          <div class="booking-header">
+            <i class="fas fa-calendar-check"></i>
+            Đặt lịch hẹn
+          </div>
+          <p class="booking-subtitle select-none">
+            Vui lòng điền đầy đủ thông tin để đặt lịch
+          </p>
+
+          <div class="steps" aria-label="Các bước đặt lịch">
+            <div
+              class="step active"
+              id="step1-label"
+              aria-current="step"
+              tabindex="0"
+            >
+              Xác thực SĐT
+            </div>
+            <div class="step" id="step2-label" tabindex="-1">Chọn dịch vụ</div>
+            <div class="step" id="step3-label" tabindex="-1">Xác nhận</div>
+          </div>
+
+          <!-- Buoc 1: Xac minh-->
+          <fieldset id="step1" aria-labelledby="step1-label">
+            <label for="phone">
+              <i class="fas fa-phone-alt"></i> Số điện thoại
+            </label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              placeholder="Nhập số điện thoại của bạn"
+              aria-describedby="phone-error"
+              autocomplete="tel"
+              inputmode="tel"
+              pattern="0[0-9]{9,10}"
+              required
+            />
+            <p id="phone-error" class="error-message hidden" role="alert"></p>
+            <div class="flex justify-center mt-6">
+              <button
+                type="button"
+                id="sendOtpBtn"
+                aria-live="polite"
+                aria-disabled="false"
+              >
+                Gửi mã OTP
+              </button>
+            </div>
+          </fieldset>
+
+          <!-- Buoc 2: Nhap ma OTP, chon dich vu, chi nhanh, ngay va gio -->
+          <fieldset id="step2" class="hidden" aria-labelledby="step2-label">
+            <label for="otp"> <i class="fas fa-key"></i> Mã OTP </label>
+            <input
+              type="text"
+              id="otp"
+              name="otp"
+              placeholder="Nhập mã OTP"
+              aria-describedby="otp-error"
+              autocomplete="one-time-code"
+              inputmode="numeric"
+              pattern="[0-9]{4,6}"
+              required
+            />
+            <p id="otp-error" class="error-message hidden" role="alert"></p>
+
+            <label for="service" class="mt-4">
+              <i class="fas fa-cut"></i> Chọn dịch vụ
+            </label>
+            <select
+              id="service"
+              name="service"
+              required
+              aria-describedby="service-error"
+            >
+              <option value="" disabled selected>-- Chọn dịch vụ --</option>
+              <option value="Cắt tóc">Cắt tóc</option>
+              <option value="Nhuộm tóc">Nhuộm tóc</option>
+              <option value="Uốn tóc">Uốn tóc</option>
+              <option value="Chăm sóc da">Chăm sóc da</option>
+              <option value="Trang điểm">Trang điểm</option>
+            </select>
+            <p id="service-error" class="error-message hidden" role="alert"></p>
+
+            <label for="branch" class="mt-4">
+              <i class="fas fa-map-marker-alt"></i> Chọn chi nhánh
+            </label>
+            <select
+              id="branch"
+              name="branch"
+              required
+              aria-describedby="branch-error"
+            >
+              <option value="" disabled selected>-- Chọn chi nhánh --</option>
+              <option value="CN1: 123 Lý Tự Trọng, Q.1, TP.HCM">
+                CN1: 123 Lý Tự Trọng, Q.1, TP.HCM
+              </option>
+              <option value="CN2: 456 Phan Xích Long, Q.Phú Nhuận">
+                CN2: 456 Phan Xích Long, Q.Phú Nhuận
+              </option>
+              <option value="CN3: 789 Trần Nhân Tôn, TP. Thủ Đức">
+                CN3: 789 Trần Nhân Tôn, TP. Thủ Đức
+              </option>
+              <option value="CN4: 101 Nguyễn Văn Cừ, Q. Ninh Kiều, Cần Thơ">
+                CN4: 101 Nguyễn Văn Cừ, Q. Ninh Kiều, Cần Thơ
+              </option>
+              <option value="CN5: 203 Hai Bà Trưng, Q.3, TP.HCM">
+                CN5: 203 Hai Bà Trưng, Q.3, TP.HCM
+              </option>
+            </select>
+            <p id="branch-error" class="error-message hidden" role="alert"></p>
+
+            <label for="date" class="mt-4">
+              <i class="fas fa-calendar-alt"></i> Chọn ngày
+            </label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              required
+              aria-describedby="date-error"
+              min=""
+            />
+            <p id="date-error" class="error-message hidden" role="alert"></p>
+
+            <label for="time" class="mt-4">
+              <i class="fas fa-clock"></i> Chọn giờ
+            </label>
+            <input
+              type="time"
+              id="time"
+              name="time"
+              required
+              aria-describedby="time-error"
+              min="08:30"
+              max="21:30"
+            />
+            <p id="time-error" class="error-message hidden" role="alert"></p>
+
+            <div class="flex justify-center mt-6 space-x-4">
+              <button
+                type="button"
+                id="backToStep1Btn"
+                aria-label="Quay lại bước xác thực số điện thoại"
+              >
+                Quay lại
+              </button>
+              <button
+                type="button"
+                id="toStep3Btn"
+                aria-live="polite"
+                aria-disabled="false"
+              >
+                Tiếp tục
+              </button>
+            </div>
+          </fieldset>
+
+          <!-- Buoc 3: Xac nhan -->
+          <fieldset id="step3" class="hidden" aria-labelledby="step3-label">
+            <h2
+              class="text-center font-semibold mb-4 text-black text-sm select-none"
+            >
+              Xác nhận thông tin
+            </h2>
+            <p>
+              <strong>Số điện thoại:</strong> <span id="confirmPhone"></span>
+            </p>
+            <p><strong>Dịch vụ:</strong> <span id="confirmService"></span></p>
+            <p><strong>Chi nhánh:</strong> <span id="confirmBranch"></span></p>
+            <p><strong>Ngày:</strong> <span id="confirmDate"></span></p>
+            <p><strong>Giờ:</strong> <span id="confirmTime"></span></p>
+
+            <div class="flex justify-center mt-6 space-x-4">
+              <button
+                type="button"
+                id="backToStep2Btn"
+                aria-label="Quay lại bước chọn dịch vụ"
+              >
+                Quay lại
+              </button>
+              <button
+                type="submit"
+                id="confirmBtn"
+                aria-live="polite"
+                aria-disabled="false"
+              >
+                Xác nhận đặt lịch
+              </button>
+            </div>
+            <p
+              id="successMessage"
+              class="success-message hidden"
+              role="alert"
+              aria-live="assertive"
+            ></p>
+          </fieldset>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <div>
+        <p><strong>Liên hệ:</strong></p>
+        <p>Hotline: 0909 888 999</p>
+        <p>Gmail: salonlanmay@gmail.com</p>
+        <p>Zalo: 0909 888 999</p>
+        <p><strong>Socials:</strong></p>
+        <p>Facebook: fb.com/salonlanmay</p>
+        <p>Tiktok: @salonlanmay</p>
+      </div>
+      <div>
+        <p><strong>Địa chỉ các chi nhánh:</strong></p>
+        <ul>
+          <li>CN1: 123 Lý Tự Trọng, Q.1, TP.HCM</li>
+          <li>CN2: 456 Phan Xích Long, Q.Phú Nhuận</li>
+          <li>CN3: 789 Trần Nhân Tôn, TP. Thủ Đức</li>
+          <li>CN4: 101 Nguyễn Văn Cừ, Q. Ninh Kiều, Cần Thơ</li>
+          <li>CN5: 203 Hai Bà Trưng, Q.3, TP. Hồ Chí Minh</li>
+        </ul>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        const phoneInput = document.getElementById("phone");
+        const sendOtpBtn = document.getElementById("sendOtpBtn");
+        const phoneError = document.getElementById("phone-error");
+
+        const step1 = document.getElementById("step1");
+        const step2 = document.getElementById("step2");
+        const step3 = document.getElementById("step3");
+
+        const step1Label = document.getElementById("step1-label");
+        const step2Label = document.getElementById("step2-label");
+        const step3Label = document.getElementById("step3-label");
+
+        const otpInput = document.getElementById("otp");
+        const otpError = document.getElementById("otp-error");
+
+        const serviceSelect = document.getElementById("service");
+        const serviceError = document.getElementById("service-error");
+
+        const branchSelect = document.getElementById("branch");
+        const branchError = document.getElementById("branch-error");
+
+        const dateInput = document.getElementById("date");
+        const dateError = document.getElementById("date-error");
+
+        const timeInput = document.getElementById("time");
+        const timeError = document.getElementById("time-error");
+
+        const backToStep1Btn = document.getElementById("backToStep1Btn");
+        const toStep3Btn = document.getElementById("toStep3Btn");
+
+        const backToStep2Btn = document.getElementById("backToStep2Btn");
+        const confirmBtn = document.getElementById("confirmBtn");
+
+        const confirmPhone = document.getElementById("confirmPhone");
+        const confirmService = document.getElementById("confirmService");
+        const confirmBranch = document.getElementById("confirmBranch");
+        const confirmDate = document.getElementById("confirmDate");
+        const confirmTime = document.getElementById("confirmTime");
+
+        const successMessage = document.getElementById("successMessage");
+
+        // OTP demo
+        let generatedOtp = null;
+
+        // Dat ngay toi thieu la ngay hien tai
+        const today = new Date().toISOString().split("T")[0];
+        dateInput.min = today;
+
+        // Kiem tra SDT
+        function validatePhone(phone) {
+          return /^0\d{9,10}$/.test(phone);
+        }
+
+        // Xac thuc OTP (4-6 so)
+        function validateOtp(otp) {
+          return /^\d{4,6}$/.test(otp);
+        }
+
+        // Xac thuc lua chon dich vu
+        function validateService(service) {
+          return service && service.trim() !== "";
+        }
+
+        // Xac thuc lua chon chi nhanh
+        function validateBranch(branch) {
+          return branch && branch.trim() !== "";
+        }
+
+        // Xac thuc ngay
+        function validateDate(date) {
+          if (!date) return false;
+          return date >= today;
+        }
+
+        // Xac thuc gio
+        function validateTime(time) {
+          if (!time) return false;
+          return time >= "08:30" && time <= "21:30";
+        }
+
+        // Thong bao loi
+        function showError(element, message) {
+          element.textContent = message;
+          element.classList.remove("hidden");
+        }
+
+        //
+        function hideError(element) {
+          element.textContent = "";
+          element.classList.add("hidden");
+        }
+
+        // Quay lai
+        function switchStep(fromStep, toStep) {
+          fromStep.classList.add("hidden");
+          toStep.classList.remove("hidden");
+        }
+
+        function updateStepLabels(activeLabel) {
+          [step1Label, step2Label, step3Label].forEach((label) => {
+            if (label === activeLabel) {
+              label.classList.add("active");
+              label.setAttribute("aria-current", "step");
+              label.setAttribute("tabindex", "0");
+              label.focus();
+            } else {
+              label.classList.remove("active");
+              label.removeAttribute("aria-current");
+              label.setAttribute("tabindex", "-1");
+            }
+          });
+        }
+
+        // Buoc 1
+        sendOtpBtn.addEventListener("click", () => {
+          const phone = phoneInput.value.trim();
+          if (!validatePhone(phone)) {
+            showError(
+              phoneError,
+              "Số điện thoại không hợp lệ. Vui lòng nhập đúng định dạng."
+            );
+            phoneInput.focus();
+            return;
+          }
+          hideError(phoneError);
+
+          // Gui OTP
+          generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
+          alert(`Mã OTP của bạn là: ${generatedOtp} (Demo)`);
+
+          // Chuyen tiep den Buoc 2
+          switchStep(step1, step2);
+          updateStepLabels(step2Label);
+
+          // Xoa truong OTP
+          otpInput.value = "";
+          serviceSelect.value = "";
+          branchSelect.value = "";
+          dateInput.value = "";
+          timeInput.value = "";
+          hideError(otpError);
+          hideError(serviceError);
+          hideError(branchError);
+          hideError(dateError);
+          hideError(timeError);
+
+          otpInput.focus();
+        });
+
+        // Buoc 2
+        backToStep1Btn.addEventListener("click", () => {
+          switchStep(step2, step1);
+          updateStepLabels(step1Label);
+          phoneInput.focus();
+        });
+
+        //
+        toStep3Btn.addEventListener("click", () => {
+          const otp = otpInput.value.trim();
+          const service = serviceSelect.value;
+          const branch = branchSelect.value;
+          const date = dateInput.value;
+          const time = timeInput.value;
+
+          let valid = true;
+
+          if (!validateOtp(otp)) {
+            showError(
+              otpError,
+              "Mã OTP không hợp lệ. Vui lòng nhập 4-6 chữ số."
+            );
+            otpInput.focus();
+            valid = false;
+          } else if (otp !== generatedOtp) {
+            showError(otpError, "Mã OTP không đúng. Vui lòng kiểm tra lại.");
+            otpInput.focus();
+            valid = false;
+          } else {
+            hideError(otpError);
+          }
+
+          if (!validateService(service)) {
+            showError(serviceError, "Vui lòng chọn dịch vụ.");
+            if (valid) serviceSelect.focus();
+            valid = false;
+          } else {
+            hideError(serviceError);
+          }
+
+          if (!validateBranch(branch)) {
+            showError(branchError, "Vui lòng chọn chi nhánh.");
+            if (valid) branchSelect.focus();
+            valid = false;
+          } else {
+            hideError(branchError);
+          }
+
+          if (!validateDate(date)) {
+            showError(
+              dateError,
+              "Vui lòng chọn ngày hợp lệ (từ hôm nay trở đi)."
+            );
+            if (valid) dateInput.focus();
+            valid = false;
+          } else {
+            hideError(dateError);
+          }
+
+          if (!validateTime(time)) {
+            showError(
+              timeError,
+              "Vui lòng chọn giờ trong khoảng 09:00 đến 19:00."
+            );
+            if (valid) timeInput.focus();
+            valid = false;
+          } else {
+            hideError(timeError);
+          }
+
+          if (!valid) return;
+
+          // Hien thi thong tin xac nhan
+          confirmPhone.textContent = phoneInput.value.trim();
+          confirmService.textContent = service;
+          confirmBranch.textContent = branch;
+          confirmDate.textContent = new Date(date).toLocaleDateString("vi-VN", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          });
+          confirmTime.textContent = time;
+
+          // Chuyen tiep den Buoc 3
+          switchStep(step2, step3);
+          updateStepLabels(step3Label);
+          successMessage.classList.add("hidden");
+          confirmBtn.focus();
+        });
+
+        // Buoc 3
+        backToStep2Btn.addEventListener("click", () => {
+          switchStep(step3, step2);
+          updateStepLabels(step2Label);
+          otpInput.focus();
+        });
+
+        document
+          .getElementById("bookingForm")
+          .addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            confirmBtn.disabled = true;
+            confirmBtn.setAttribute("aria-disabled", "true");
+
+            setTimeout(() => {
+              successMessage.textContent =
+                "Đặt lịch thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.";
+              successMessage.classList.remove("hidden");
+
+              // Reset
+              setTimeout(() => {
+                confirmBtn.disabled = false;
+                confirmBtn.setAttribute("aria-disabled", "false");
+                successMessage.classList.add("hidden");
+                phoneInput.value = "";
+                otpInput.value = "";
+                serviceSelect.value = "";
+                branchSelect.value = "";
+                dateInput.value = "";
+                timeInput.value = "";
+                generatedOtp = null;
+                switchStep(step3, step1);
+                updateStepLabels(step1Label);
+                phoneInput.focus();
+              }, 3000);
+            }, 1500);
+          });
+
+        // Accessibility
+        [step1Label, step2Label, step3Label].forEach((label, index) => {
+          label.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+              e.preventDefault();
+              const nextIndex = (index + 1) % 3;
+              [step1Label, step2Label, step3Label][nextIndex].focus();
+            } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+              e.preventDefault();
+              const prevIndex = (index + 2) % 3;
+              [step1Label, step2Label, step3Label][prevIndex].focus();
+            }
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
