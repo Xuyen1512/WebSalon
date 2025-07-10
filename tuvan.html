@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,31 +10,259 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: "Montserrat", "Cormorant Garamond", "Merriweather",
+          "Josefin Sans", sans-serif;
+        background: linear-gradient(
+          to right,
+          #ffebcd 30%,
+          white 80%,
+          #f3f3f3 100%
+        );
+        color: #7a5a1a;
+      }
+      #container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: white;
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 900px;
+        box-sizing: border-box;
+        z-index: 1000;
+        font-size: 12px;
+        color: #7a5a1a;
+        font-weight: 600;
+      }
+      header .logo {
+        width: 60px;
+        height: 30px;
+        background: #ccc;
+        border-radius: 50%;
+      }
+      header .logo img {
+        height: 100%;
+        width: auto;
+      }
+      nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 15px;
+        font-weight: 600;
+      }
+      nav ul li {
+        cursor: pointer;
+      }
+      nav ul li a {
+        color: #7a5a1a;
+        text-decoration: none;
+      }
+      nav ul li a:hover,
+      nav ul li a:focus,
+      nav ul li a:visited,
+      nav ul li a:active {
+        text-decoration: none;
+        color: #7a5a1a;
+      }
+
+      .icons {
+        display: flex;
+        gap: 10px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      main {
+        margin-top: 70px;
+        text-align: center;
+      }
+      main h1 {
+        font-weight: 900;
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+      .contact-info {
+        font-size: 9px;
+        font-weight: 600;
+        line-height: 1.2;
+        max-width: 300px;
+        margin: 0 auto 30px;
+        text-align: left;
+      }
+      .contact-info p {
+        margin: 3px 0;
+      }
+      .contact-info strong {
+        display: block;
+        margin-bottom: 3px;
+      }
+
+      .grid-2x2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        max-width: 320px;
+        margin: 0 auto 40px;
+      }
+      .grid-2x2 > .branch,
+      .grid-1x1.branch {
+        background: #d9d9d9;
+        border-radius: 8px;
+        height: 100px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+      }
+      .branch img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.65);
+        color: #fff;
+        font-size: 8px;
+        padding: 5px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+      .branch:hover .caption {
+        opacity: 1;
+      }
+
+      .grid-1x1 {
+        width: 150px;
+        height: 100px;
+        margin: 0 auto 70px;
+      }
+
+      footer {
+        background-color: #a67c4a;
+        color: white;
+        font-size: 9px;
+        font-weight: 600;
+        line-height: 1.2;
+        padding: 25px 20px;
+        display: flex;
+        justify-content: space-between;
+        max-width: 900px;
+        margin: 0 auto 20px;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+      }
+      footer > div {
+        width: 45%;
+        min-width: 250px;
+      }
+      footer strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+      footer ul {
+        padding-left: 15px;
+        margin: 0;
+        list-style: disc;
+        line-height: 1.4;
+      }
+
+      @media (max-width: 600px) {
+        #container {
+          padding: 10px;
+        }
+        header {
+          width: 100%;
+          left: 0;
+          transform: none;
+          font-size: 10px;
+          padding: 10px;
+        }
+        nav ul {
+          gap: 8px;
+          font-size: 10px;
+        }
+        .contact-info {
+          max-width: 100%;
+          font-size: 8px;
+        }
+        .grid-2x2 {
+          max-width: 100%;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .grid-2x2 > .branch,
+        .grid-1x1 {
+          height: 80px;
+          font-size: 7px;
+        }
+        footer {
+          flex-direction: column;
+          font-size: 8px;
+        }
+        footer > div {
+          width: 100%;
+          margin-bottom: 15px;
+        }
+      }
+    </style>
   </head>
+
   <body>
     <div id="container">
       <header>
         <div class="logo">
-          <img src="Logo.png" alt="Logo" />
+          <img src="Hinh/Logo.png" alt="Logo" />
         </div>
         <nav>
           <ul>
-            <li>Trang chủ</li>
-            <li>Giới thiệu</li>
-            <li>Dịch vụ</li>
-            <li>Tin tức</li>
-            <li>Đặt lịch</li>
-            <li>Tư vấn</li>
+            <li><a href="index.php">Trang chủ</a></li>
+            <li><a href="index.gt.html">Giới thiệu</a></li>
+            <li><a href="DỊCH VỤ/dichvu.php">Dịch vụ</a></li>
+            <li><a href="tintuc.php">Tin tức</a></li>
+            <li><a href="datlich.html">Đặt lịch</a></li>
+            <li><a href="tuvan.html">Tư vấn</a></li>
           </ul>
         </nav>
         <div class="icons">
-          <span>🔍</span>
-          <span>👤</span>
-          <span>☰</span>
+          <a href="timkiem.php" title="Tìm kiếm"
+            ><i class="fas fa-search"></i
+          ></a>
+          <a href="login.php" title="Đăng nhập"><i class="fas fa-user"></i></a>
+          <a href="dashboard.php" title="Menu"><i class="fas fa-bars"></i></a>
         </div>
       </header>
+
       <main>
         <h1>Liên hệ và Tư Vấn</h1>
+
         <section class="contact-info">
           <p><strong>Thông tin liên hệ:</strong></p>
           <p>Hotline: 0909 888 999</p>
@@ -44,14 +272,47 @@
           <p>Facebook: fb.com/salonlanmay</p>
           <p>TikTok: @salonlanmay</p>
         </section>
+
         <section class="grid-2x2">
-          <div>ảnh và các thông báo từng chi nhánh gồm SDT, Zalo</div>
-          <div>...</div>
-          <div>...</div>
-          <div>...</div>
+          <div class="branch">
+            <img
+              src="https://ubeauty.vn/wp-content/uploads/2024/07/tiem-toc-quan-4-5-min.jpg"
+              alt="Chi nhánh 1"
+            />
+            <p class="caption">CN1: 123 Lý Tự Trọng, Q.1, TP.HCM</p>
+          </div>
+          <div class="branch">
+            <img
+              src="https://images.pexels.com/photos/705255/pexels-photo-705255.jpeg"
+              alt="Chi nhánh 2"
+            />
+            <p class="caption">CN2: 456 Phan Xích Long, Q.Phú Nhuận</p>
+          </div>
+          <div class="branch">
+            <img
+              src="https://gcs.tripi.vn/public-tripi/tripi-feed/img/485412STX/anh-mo-ta.png"
+              alt="Chi nhánh 3"
+            />
+            <p class="caption">CN3: 789 Trần Nhân Tôn, TP. Thủ Đức</p>
+          </div>
+          <div class="branch">
+            <img
+              src="https://wallpapers.com/images/hd/luxurious-aesthetic-hair-salon-fouu8bx77gcoygos.jpg"
+              alt="Chi nhánh 4"
+            />
+            <p class="caption">CN4: 101 Nguyễn Văn Cừ, Q. Ninh Kiều, Cần Thơ</p>
+          </div>
         </section>
-        <div class="grid-1x1"></div>
+
+        <div class="grid-1x1 branch">
+          <img
+            src="https://images2.thanhnien.vn/uploaded/yennh/2020_07_17/img_81901_LIWR.jpeg?width=500"
+            alt="Chi nhánh 5"
+          />
+          <p class="caption">CN5: 203 Hai Bà Trưng, Q.3, TP.HCM</p>
+        </div>
       </main>
+
       <footer>
         <div>
           <p><strong>Liên hệ:</strong></p>
@@ -66,12 +327,10 @@
           <p><strong>Địa chỉ các chi nhánh:</strong></p>
           <ul>
             <li>CN1: 123 Lý Tự Trọng, Q.1, TP.HCM</li>
-            <li>CN2: 456 Phan Xích Long, Q.Phú Nhuận, TP.HCM</li>
+            <li>CN2: 456 Phan Xích Long, Q.Phú Nhuận</li>
             <li>CN3: 789 Trần Nhân Tôn, TP. Thủ Đức</li>
-            <li>
-              CN4: 101 Nguyễn Văn Cừ, Phường An Châu, Quận Ninh Kiều, Cần Thơ
-            </li>
-            <li>CN5: 203 Hai Bà Trưng, Phường 6, Quận 3, TP. Hồ Chí Minh</li>
+            <li>CN4: 101 Nguyễn Văn Cừ, Q. Ninh Kiều, Cần Thơ</li>
+            <li>CN5: 203 Hai Bà Trưng, Q.3, TP. Hồ Chí Minh</li>
           </ul>
         </div>
       </footer>
